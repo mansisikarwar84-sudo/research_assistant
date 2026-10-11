@@ -1,0 +1,96 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "scrape-url",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -336,
+        -80
+      ],
+      "id": "13edf9c6-fd19-4c43-b727-e9f1276a0f21",
+      "name": "Webhook",
+      "webhookId": "df5da702-62b5-4896-8fcd-3e48657e2ffc"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -32,
+        -64
+      ],
+      "id": "c46fa236-98f9-4fe7-8628-8c724bb7f8b0",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "text",
+              "cssSelector": "p",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        -48
+      ],
+      "id": "e8debdbf-05a9-4ef5-8551-60796c825800",
+      "name": "HTML"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "e1bfe50c-1bd5-438e-bebe-203d9107432a",
+  "meta": {
+    "instanceId": "15bf3018a87d4bbffa0cd2efaa6c4cc0505106be3ca52bcaacaed346b5c5f502"
+  },
+  "nodeGroups": [],
+  "id": "NeHyMBMcuIJxbfOM",
+  "tags": []
+}
